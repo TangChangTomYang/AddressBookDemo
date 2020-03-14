@@ -112,6 +112,13 @@
             
             NSLog(@"id: %d",recordID);
             
+            // CompositeName 是复合名称的意思 (firstName lastName)
+            NSString *name = CFBridgingRelease(ABRecordCopyCompositeName(recordRef));
+            NSLog(@"name: %@", name);
+            
+            NSString *nickname = CFBridgingRelease(ABRecordCopyValue(recordRef, kABPersonNicknameProperty));
+             NSLog(@"nickname: %@", nickname);
+            
             // 获取姓名
             NSString *firstName = CFBridgingRelease(ABRecordCopyValue(recordRef, kABPersonFirstNameProperty));
             NSString *lastName = CFBridgingRelease(ABRecordCopyValue(recordRef, kABPersonLastNameProperty));
@@ -120,6 +127,7 @@
             
             ABMultiValueRef phoneValueRef  = ABRecordCopyValue(recordRef, kABPersonPhoneProperty);
             // 遍历所有的电话
+            // kABPersonPhoneProperty 电话
             NSInteger phoneNumCount = ABMultiValueGetCount(phoneValueRef);
             for(int i=0; i<phoneNumCount; i++){
                 // 取出标签
