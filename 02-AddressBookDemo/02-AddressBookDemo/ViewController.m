@@ -30,6 +30,7 @@
  
  在github 上有一个 RHAddressBook 第三方框架, 做的比较好
  
+ 
                      
  */
 
@@ -105,6 +106,11 @@
             
             // 数组里面每个对象, 都是一个联系人记录
             ABRecordRef recordRef =  CFArrayGetValueAtIndex(peopleArrayRef, i);
+            
+            // 获取ABRecordID, 其实就是一个 int32_t
+            ABRecordID recordID = ABRecordGetRecordID(recordRef);
+            
+            NSLog(@"id: %d",recordID);
             
             // 获取姓名
             NSString *firstName = CFBridgingRelease(ABRecordCopyValue(recordRef, kABPersonFirstNameProperty));
